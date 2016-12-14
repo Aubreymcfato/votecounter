@@ -291,6 +291,13 @@ def get_score(books_file,
                         logger.debug("User: {} - Case 4 - Reverted proofread".format(newUser))
                         punts[oldUser] -= 3
                         revi[oldUser] -= 1
+                
+                # add 2 points for Quality level 50%
+                if quality_level == 2 and (old is None or old < 2) and timestamp >= contest_start and timestamp < contest_end:
+                    logger.debug("User: {} - Case 5 - Transcribe the page to 50%".format(newUser))
+                    # User b proofreads the page pag
+                    punts[newUser] += 2
+                    revi[newUser] += 1        
 
                 old = quality_level
                 oldUser = newUser
